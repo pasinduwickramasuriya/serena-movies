@@ -59,7 +59,7 @@ export default function Navbar({ onSearch }: NavbarProps) {
               placeholder="Search..."
               value={searchQuery}
               onChange={handleSearch}
-              className="bg-transparent border-none outline-none text-xs ml-2 w-20 sm:w-36 md:w-48 placeholder:text-black text-black font-medium"
+              className="bg-transparent border-none outline-none text-base md:text-sm ml-2 w-20 sm:w-36 md:w-48 placeholder:text-black text-black font-medium"
             />
           </div>
 
