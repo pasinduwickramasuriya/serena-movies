@@ -212,9 +212,9 @@ export default function Hero({ netflixOriginals }: HeroProps) {
             PLAY NOW
           </button>
 
-          <button className="bannerButton bg-neutral-800/60 backdrop-blur-md border border-neutral-700 text-white hover:bg-neutral-700 shadow-xl active:scale-95 transition-all">
+          {/* <button className="bannerButton bg-neutral-800/60 backdrop-blur-md border border-neutral-700 text-white hover:bg-neutral-700 shadow-xl active:scale-95 transition-all">
             MORE DETAILS
-          </button>
+          </button> */}
         </div>
       </div>
 
