@@ -1,8 +1,152 @@
+// 'use client';
+
+// import { useEffect, useState } from 'react';
+// import Link from 'next/link';
+// import { Roboto } from 'next/font/google';
+// import { IoSearchOutline, IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
+
+// const googleFont = Roboto({
+//   subsets: ['latin'],
+//   weight: ['400', '500', '700'],
+//   fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+// });
+
+// interface NavbarProps {
+//   onSearch?: (query: string) => void;
+// }
+
+// export default function Navbar({ onSearch }: NavbarProps) {
+//   const [isScrolled, setIsScrolled] = useState(false);
+//   const [searchQuery, setSearchQuery] = useState('');
+//   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+//   useEffect(() => {
+//     const handleScroll = () => {
+//       setIsScrolled(window.scrollY > 0);
+//     };
+
+//     window.addEventListener('scroll', handleScroll);
+//     return () => window.removeEventListener('scroll', handleScroll);
+//   }, []);
+
+//   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+//     const query = e.target.value;
+//     setSearchQuery(query);
+//     if (onSearch) onSearch(query);
+//   };
+
+//   const navItems = [
+//     { title: 'Home Dashboard', desc: 'Back to main stream overview', href: '/' },
+//     { title: 'TV Series Collection', desc: 'Explore original episodic shows', href: '/series' },
+//     { title: 'Full Length Movies', desc: 'Cinema productions and hit blockbusters', href: '/movies' },
+//     { title: 'New & Trending', desc: 'Fresh additions and top stream metrics', href: '/new' },
+//     { title: 'My Saved Watchlist', desc: 'Your personalized custom bookmarks', href: '/my-list' },
+//   ];
+
+//   return (
+//     <>
+//       {/* Top Floating Google-Style Navbar */}
+//       <nav
+//         className={`${googleFont.className} fixed top-4 sm:top-6 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-16 pointer-events-none antialiased`}
+//       >
+//         {/* Left Sector: Google Pill Capsule Logo */}
+//         <Link href="/" className="pointer-events-auto">
+//           <div
+//             className={`inline-flex items-center px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border transition-all duration-300 ${
+//               isScrolled
+//                 ? 'bg-white text-[#1f1f1f] border-[#dadce0] shadow-[0_1px_3px_rgba(60,64,67,0.3),0_4px_8px_rgba(60,64,67,0.15)]'
+//                 : 'bg-[#f1f3f4] text-[#1f1f1f] border-transparent hover:bg-[#e8eaed]'
+//             }`}
+//           >
+//             <span className="text-[18px] font-medium tracking-normal leading-none select-none">
+//               Serena
+//             </span>
+//           </div>
+//         </Link>
+
+//         {/* Right Sector: Search Bar + Menu Toggle Button */}
+//         <div className="flex items-center gap-2.5 sm:gap-3 pointer-events-auto">
+//           {/* Search Box: Google Omnibox Pill Style */}
+//           <div
+//             className={`flex items-center rounded-full px-4 sm:px-5 py-2 sm:py-2.5 border transition-all duration-200 focus-within:ring-2 focus-within:ring-[#1a73e8] focus-within:bg-white focus-within:border-transparent ${
+//               isScrolled
+//                 ? 'bg-white border-[#dadce0] shadow-[0_1px_2px_rgba(60,64,67,0.3)]'
+//                 : 'bg-[#f1f3f4] border-transparent hover:bg-[#e8eaed]'
+//             }`}
+//           >
+//             <IoSearchOutline className="w-5 h-5 text-[#5f6368] shrink-0" />
+//             <input
+//               type="text"
+//               placeholder="Search..."
+//               value={searchQuery}
+//               onChange={handleSearch}
+//               className="bg-transparent border-none outline-none text-[18px] ml-2.5 w-24 sm:w-44 md:w-56 placeholder:text-[#5f6368] text-[#1f1f1f] font-normal leading-normal"
+//             />
+//           </div>
+
+//           {/* Action Menu Pill Button */}
+//           <button
+//             onClick={() => setIsMenuOpen(!isMenuOpen)}
+//             className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 active:scale-90 focus:outline-none ${
+//               isMenuOpen
+//                 ? 'bg-[#1f1f1f] text-white border-[#1f1f1f] shadow-md'
+//                 : isScrolled
+//                 ? 'bg-white text-[#444746] border-[#dadce0] hover:bg-[#f8f9fa] shadow-sm'
+//                 : 'bg-[#f1f3f4] text-[#444746] border-transparent hover:bg-[#e8eaed]'
+//             }`}
+//             aria-label="Toggle Navigation Menu"
+//           >
+//             {isMenuOpen ? <IoCloseOutline className="w-6 h-6" /> : <IoMenuOutline className="w-6 h-6" />}
+//           </button>
+//         </div>
+//       </nav>
+
+//       {/* Floating Dropdown Menu: Clean Google Material Card Design */}
+//       <div
+//         className={`${googleFont.className} fixed top-20 sm:top-24 right-4 sm:right-8 md:right-12 lg:right-16 z-40 flex flex-col gap-2 w-80 sm:w-96 transition-all duration-300 ${
+//           isMenuOpen
+//             ? 'pointer-events-auto opacity-100 translate-y-0'
+//             : 'pointer-events-none opacity-0 -translate-y-3'
+//         }`}
+//       >
+//         <div className="bg-white border border-[#dadce0] rounded-[28px] p-3 shadow-[0_4px_16px_rgba(60,64,67,0.15)] flex flex-col gap-1">
+//           {navItems.map((item) => (
+//             <Link
+//               key={item.href}
+//               href={item.href}
+//               onClick={() => setIsMenuOpen(false)}
+//               className="flex flex-col px-5 py-3.5 rounded-[20px] bg-[#f8f9fa] hover:bg-[#e8eaed] active:bg-[#dadce0] text-[#1f1f1f] transition-all duration-150 border border-transparent hover:border-[#dadce0]"
+//             >
+//               <span className="text-[18px] font-medium text-[#1f1f1f] leading-snug">
+//                 {item.title}
+//               </span>
+//               <span className="text-[14px] text-[#5f6368] font-normal mt-0.5">
+//                 {item.desc}
+//               </span>
+//             </Link>
+//           ))}
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+
+
+
+
 'use client';
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { IoSearchOutline, IoNotificationsOutline, IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
+import { Roboto } from 'next/font/google';
+import { IoSearchOutline, IoMenuOutline, IoCloseOutline } from 'react-icons/io5';
+
+const googleFont = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '500', '700'],
+  fallback: ['system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+});
 
 interface NavbarProps {
   onSearch?: (query: string) => void;
@@ -28,173 +172,98 @@ export default function Navbar({ onSearch }: NavbarProps) {
     if (onSearch) onSearch(query);
   };
 
+  const navItems = [
+    { title: 'Home Dashboard', desc: 'Back to main stream overview', href: '/' },
+    { title: 'TV Series Collection', desc: 'Explore original episodic shows', href: '/series' },
+    { title: 'Full Length Movies', desc: 'Cinema productions and hit blockbusters', href: '/movies' },
+    { title: 'New & Trending', desc: 'Fresh additions and top stream metrics', href: '/new' },
+    { title: 'My Saved Watchlist', desc: 'Your personalized custom bookmarks', href: '/my-list' },
+  ];
+
   return (
     <>
-      {/* Top Floating Core Navigation Wrapper (Completely transparent window backdrop) */}
-      <div className="fixed top-4 left-0 right-0 z-50 flex items-center justify-between px-4 lg:px-10 pointer-events-none">
-
-
-        {/* Left Sector: Completely Separate Inline Logo Capsule */}
+      {/* Top Floating Google-Style Navbar */}
+      <nav
+        className={`${googleFont.className} fixed top-4 sm:top-6 left-0 right-0 z-50 flex items-center justify-between px-4 sm:px-8 md:px-12 lg:px-16 pointer-events-none antialiased`}
+      >
+        {/* Left Sector: Logo Pill */}
         <Link href="/" className="pointer-events-auto">
-          <div className={`logoBlock transition-all duration-300 ${isScrolled
-            ? 'bg-white/90 backdrop-blur-md shadow-md border-neutral-200/60'
-            : 'bg-white/60 backdrop-blur-xs border-transparent'
-            }`}>
-            {/* Slightly downsized font text to text-lg to match the tighter micro-capsule size */}
-            <span className="text-lg font-bold text-black tracking-tight italic leading-none block">
+          <div
+            className={`inline-flex items-center px-4 sm:px-6 py-2.5 sm:py-3 rounded-full border transition-all duration-300 ${
+              isScrolled
+                ? 'bg-white text-[#1f1f1f] border-[#dadce0] shadow-[0_1px_3px_rgba(60,64,67,0.3),0_4px_8px_rgba(60,64,67,0.15)]'
+                : 'bg-[#f1f3f4] text-[#1f1f1f] border-transparent hover:bg-[#e8eaed]'
+            }`}
+          >
+            <span className="text-[18px] font-medium tracking-normal leading-none select-none">
               Serena
             </span>
           </div>
         </Link>
 
-        {/* Right Sector: Row of Independent Floating Blocks */}
-        <div className="flex items-center space-x-3 pointer-events-auto">
-
-          {/* SEARCH SECTOR: Separate Inline Floating Block */}
-          <div className={`searchBlock transition-all duration-300 flex items-center rounded-full px-4 py-1.5 focus-within:ring-2 focus-within:ring-black/5 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md border-neutral-200/60' : 'bg-white/60 backdrop-blur-xs border-neutral-200/30'
-            }`}>
-            <IoSearchOutline className="h-3.5 w-3.5 text-black" />
+        {/* Right Sector: Search Bar + Menu Toggle Button */}
+        <div className="flex items-center gap-2 sm:gap-3 pointer-events-auto">
+          {/* Search Box */}
+          <div
+            className={`flex items-center rounded-full px-3.5 sm:px-5 py-2 sm:py-2.5 border transition-all duration-200 focus-within:ring-2 focus-within:ring-[#1a73e8] focus-within:bg-white focus-within:border-transparent ${
+              isScrolled
+                ? 'bg-white border-[#dadce0] shadow-[0_1px_2px_rgba(60,64,67,0.3)]'
+                : 'bg-[#f1f3f4] border-transparent hover:bg-[#e8eaed]'
+            }`}
+          >
+            <IoSearchOutline className="w-5 h-5 text-[#5f6368] shrink-0" />
             <input
               type="text"
               placeholder="Search..."
               value={searchQuery}
               onChange={handleSearch}
-              className="bg-transparent border-none outline-none text-base md:text-sm ml-2 w-20 sm:w-36 md:w-48 placeholder:text-black text-black font-medium"
+              className="bg-transparent border-none outline-none text-[16px] sm:text-[18px] ml-2 sm:ml-2.5 w-20 sm:w-44 md:w-56 placeholder:text-[#5f6368] text-[#1f1f1f] font-normal leading-normal"
             />
           </div>
 
-          {/* HAMBURGER SECTOR: Completely Independent Pill Button Block */}
+          {/* Action Menu Pill Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`flex h-9 w-9 items-center justify-center rounded-full shadow-sm active:scale-95 transition-all duration-300 focus:outline-none z-[60] relative hamburgerBlock ${isMenuOpen
-              ? 'bg-neutral-900 text-white ring-4 ring-neutral-900/10 border-neutral-900'
-              : isScrolled
-                ? 'bg-white/90 backdrop-blur-md text-neutral-800 border-neutral-200/60 shadow-md'
-                : 'bg-white/60 backdrop-blur-xs text-neutral-800 border-neutral-200/30'
-              }`}
+            className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 active:scale-90 focus:outline-none ${
+              isMenuOpen
+                ? 'bg-[#1f1f1f] text-white border-[#1f1f1f] shadow-md'
+                : isScrolled
+                ? 'bg-white text-[#444746] border-[#dadce0] hover:bg-[#f8f9fa] shadow-sm'
+                : 'bg-[#f1f3f4] text-[#444746] border-transparent hover:bg-[#e8eaed]'
+            }`}
             aria-label="Toggle Navigation Menu"
           >
-            {isMenuOpen ? <IoCloseOutline className="h-4 w-4" /> : <IoMenuOutline className="h-4 w-4" />}
+            {isMenuOpen ? <IoCloseOutline className="w-6 h-6" /> : <IoMenuOutline className="w-6 h-6" />}
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Floating Staggered Dropdown Menu Items (Fully separate blocks with matching rounded pill curves) */}
+      {/* Floating Dropdown Menu */}
       <div
-        className={`fixed top-20 right-4 lg:right-10 z-40 flex flex-col space-y-2.5 w-76 sm:w-84 transition-all duration-300 ${isMenuOpen ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
-          }`}
+        className={`${googleFont.className} fixed top-20 sm:top-24 right-4 sm:right-8 md:right-12 lg:right-16 z-40 flex flex-col gap-2 w-[calc(100vw-2rem)] max-w-sm sm:w-96 transition-all duration-300 ${
+          isMenuOpen
+            ? 'pointer-events-auto opacity-100 translate-y-0'
+            : 'pointer-events-none opacity-0 -translate-y-3'
+        }`}
       >
-
-        {/* Sector 1: Home Dashboard */}
-        <Link
-          href="/"
-          onClick={() => setIsMenuOpen(false)}
-          className={`blogLink rounded-full bg-slate-50 border-slate-200/80 hover:border-slate-400/60 ${isMenuOpen ? 'showLink delay-1' : 'hideLink'}`}
-        >
-          <span className="text-slate-900 font-bold text-xs sm:text-sm">Home Dashboard</span>
-          <span className="text-[10px] text-slate-500 font-normal mt-0.5 opacity-90">Back to main stream overview</span>
-        </Link>
-
-        {/* Sector 2: TV Series */}
-        <Link
-          href="/series"
-          onClick={() => setIsMenuOpen(false)}
-          className={`blogLink rounded-full bg-indigo-50/90 border-indigo-200/80 hover:border-indigo-400/60 ${isMenuOpen ? 'showLink delay-2' : 'hideLink'}`}
-        >
-          <span className="text-indigo-900 font-bold text-xs sm:text-sm">TV Series Collection</span>
-          <span className="text-[10px] text-indigo-500 font-normal mt-0.5 opacity-90">Explore original episodic shows</span>
-        </Link>
-
-        {/* Sector 3: Movies */}
-        <Link
-          href="/movies"
-          onClick={() => setIsMenuOpen(false)}
-          className={`blogLink rounded-full bg-violet-50/90 border-violet-200/80 hover:border-violet-400/60 ${isMenuOpen ? 'showLink delay-3' : 'hideLink'}`}
-        >
-          <span className="text-violet-900 font-bold text-xs sm:text-sm">Full Length Movies</span>
-          <span className="text-[10px] text-violet-500 font-normal mt-0.5 opacity-90">Cinema productions and hit blockbusters</span>
-        </Link>
-
-        {/* Sector 4: New Releases */}
-        <Link
-          href="/new"
-          onClick={() => setIsMenuOpen(false)}
-          className={`blogLink rounded-full bg-amber-50/90 border-amber-200/80 hover:border-amber-400/60 ${isMenuOpen ? 'showLink delay-4' : 'hideLink'}`}
-        >
-          <span className="text-amber-900 font-bold text-xs sm:text-sm">New & Trending Releases</span>
-          <span className="text-[10px] text-amber-500 font-normal mt-0.5 opacity-90">Fresh additions and top stream metrics</span>
-        </Link>
-
-        {/* Sector 5: Watchlist */}
-        <Link
-          href="/my-list"
-          onClick={() => setIsMenuOpen(false)}
-          className={`blogLink rounded-full bg-rose-50/90 border-rose-200/80 hover:border-rose-400/60 ${isMenuOpen ? 'showLink delay-5' : 'hideLink'}`}
-        >
-          <span className="text-rose-900 font-bold text-xs sm:text-sm">My Saved Bookmarks</span>
-          <span className="text-[10px] text-rose-500 font-normal mt-0.5 opacity-90">Your personalized custom watchlist</span>
-        </Link>
-
+        <div className="bg-white border border-[#dadce0] rounded-[28px] p-3 shadow-[0_4px_16px_rgba(60,64,67,0.15)] flex flex-col gap-1">
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="flex flex-col px-5 py-3.5 rounded-[20px] bg-[#f8f9fa] hover:bg-[#e8eaed] active:bg-[#dadce0] text-[#1f1f1f] transition-all duration-150 border border-transparent hover:border-[#dadce0]"
+            >
+              <span className="text-[18px] font-medium text-[#1f1f1f] leading-snug">
+                {item.title}
+              </span>
+              <span className="text-[14px] text-[#5f6368] font-normal mt-0.5">
+                {item.desc}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
-
-      {/* Styled JSX Styles for the Separate Custom Sectors */}
-      <style jsx>{`
-        /* Isolated Logo Block Capsule Style */
-        .logoBlock {
-          display: inline-flex;
-          padding: 0.6rem 1.4rem;
-          border-radius: 9999px;
-          border-width: 1px;
-          border-style: solid;
-        }
-
-        /* Isolated Separate Search Block Capsule Style */
-        .searchBlock {
-          border-width: 1px;
-          border-style: solid;
-        }
-
-        /* Isolated Separate Hamburger Block Capsule Style */
-        .hamburgerBlock {
-          border-width: 1px;
-          border-style: solid;
-        }
-
-        /* Reusable Isolated Pill-Shaped Navigation Block Sector Style */
-        .blogLink {
-          display: flex;
-          flex-direction: column;
-          padding: 0.85rem 2rem;
-          border-width: 1px;
-          border-style: solid;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-          transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease, background-color 0.2s ease, border-color 0.2s ease;
-        }
-        
-        .blogLink:hover {
-          background-color: #ffffff !important;
-          border-color: rgba(0, 0, 0, 0.15);
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-          transform: scale(1.02) translateY(-3px) !important;
-        }
-
-        /* Staggered entry transitions */
-        .showLink {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-        
-        .hideLink {
-          opacity: 0;
-          transform: translateY(-16px) scale(0.92);
-        }
-
-        .delay-1 { transition-delay: 0.02s; }
-        .delay-2 { transition-delay: 0.05s; }
-        .delay-3 { transition-delay: 0.08s; }
-        .delay-4 { transition-delay: 0.11s; }
-        .delay-5 { transition-delay: 0.14s; }
-      `}</style>
     </>
   );
 }
