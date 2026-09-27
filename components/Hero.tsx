@@ -52,7 +52,7 @@ export default function Hero({ netflixOriginals = [] }: HeroProps) {
         }
         return nextIdx;
       });
-    }, 6000); // 6-second timer
+    }, 30000); // 6-second timer
 
     return () => clearInterval(interval);
   }, [netflixOriginals, isHovered]);
