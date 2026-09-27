@@ -94,7 +94,7 @@ export default function Hero({ netflixOriginals = [] }: HeroProps) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       // className={`${googleFont.className} w-full bg-white text-[#1f1f1f] pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden antialiased`}
-      className={`${googleFont.className} w-full bg-white text-[#1f1f1f] pt-30 sm:pt-16 md:pt-20 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden antialiased`}
+      className={`${googleFont.className} w-full bg-white text-[#1f1f1f] pt-23 sm:pt-16 md:pt-20 pb-8 sm:pb-12 md:pb-16 px-4 sm:px-8 md:px-12 lg:px-16 overflow-hidden antialiased`}
     >
       <div className="max-w-7xl mx-auto flex flex-col gap-2 sm:gap-10">
 
